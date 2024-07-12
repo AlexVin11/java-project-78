@@ -12,12 +12,22 @@ public class StringSchema extends BasicSchema {
     }
 
     public void minLength(int number) {
-        Predicate<BasicSchema> minLengthPredicate = e ->
-        this.checks.put(MIN_LENGTH, )
+        Predicate<Integer> minLengthPredicate = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer number) {
+                return false;
+            }
+        };
+        this.checks.put(MIN_LENGTH, minLengthPredicate);
     }
 
     public void contains(String str) {
-
+        Predicate<String> containsPredicate = new Predicate<String>() {
+            @Override
+            public boolean test(String str) {
+                return false;
+            }
+        };
     }
 
     @Override
