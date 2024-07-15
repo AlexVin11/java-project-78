@@ -3,6 +3,7 @@ package hexlet.code;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public abstract class BasicSchema<T> {
@@ -13,5 +14,5 @@ public abstract class BasicSchema<T> {
         checks.put(checkName, predicate);
     }
 
-    public abstract boolean isValid();
+    public abstract boolean isValid(Objects obj);
 }
