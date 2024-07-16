@@ -1,37 +1,38 @@
 package hexlet.code;
 
 
-import java.util.Objects;
 import java.util.function.Predicate;
 
-public class StringSchema extends BasicSchema {
-    private final String REQUIRED_CHECK_NAME = "required";
-    private final String MIN_LENGTH_CHECK_NAME = "minLength";
-    private final String CONTAINS_CHECK_NAME = "contains";
+public class StringSchema extends BasicSchema<String> {
 
-    public void required() {
-        Predicate<Objects> required = e -> Objects.nonNull(e);
-        this.addCheck(REQUIRED_CHECK_NAME, required);
+    public StringSchema required() {
+        setRequired();
+        return this;
     }
 
     public void minLength(int number) {
         Predicate<String> minLength = e -> e.length() <= number;
-        this.addCheck(MIN_LENGTH_CHECK_NAME, minLength);
+        this.addCheck(minLength);
     }
 
     public void contains(String str) {
         Predicate<String> contains = e -> e.contains(str);
-        this.addCheck(CONTAINS_CHECK_NAME, contains);
+        this.addCheck(contains);
     }
 
     @Override
-    public boolean isValid(Objects obj) {
-        var processedObj = obj.toString();
-        for (var entrys : this.checks.entrySet()) {
-            var checkName = entrys.
+    public boolean isValid(String str) {
+        if (this.required == false) {
+            return true;
+        } else {
+            for (var check : this.checks) {
+                if (!check.test(str)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         }
-        if (checks.containsKey("required")) {
-            var predicate = checks.get("required");
-        }
+        return false;
     }
 }
