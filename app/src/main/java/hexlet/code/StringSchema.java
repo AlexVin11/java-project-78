@@ -10,14 +10,16 @@ public class StringSchema extends BasicSchema<String> {
         return this;
     }
 
-    public void minLength(int number) {
-        Predicate<String> minLength = e -> e.length() <= number;
-        this.addCheck(minLength);
+    public StringSchema minLength(int number) {
+        Predicate<String> minLength = e -> e.length() >= number;
+        updateCheck(minLength);
+        return this;
     }
 
-    public void contains(String str) {
+    public StringSchema contains(String str) {
         Predicate<String> contains = e -> e.contains(str);
-        this.addCheck(contains);
+        updateCheck(contains);
+        return this;
     }
 
     @Override
