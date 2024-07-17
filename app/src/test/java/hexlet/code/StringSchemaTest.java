@@ -34,4 +34,11 @@ public class StringSchemaTest {
         stringSchema = stringSchema.contains("whatthe");
         assertEquals(false, stringSchema.isValid("what does the fox say"));
     }
+
+    @Test
+    public void testMinLength() {
+        stringSchema.required();
+        stringSchema.minLength(10).minLength(4);
+        assertEquals(true, stringSchema.isValid("Hexlet"));
+    }
 }
