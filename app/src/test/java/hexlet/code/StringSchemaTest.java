@@ -24,6 +24,7 @@ public class StringSchemaTest {
 
     @Test
     public void conatainsTestIsValid() {
+        stringSchema.required();
         stringSchema = stringSchema.contains("wh");
         assertEquals(true, stringSchema.isValid("what does the fox say"));
         stringSchema = stringSchema.contains("what");
