@@ -20,6 +20,9 @@ public class StringSchemaTest {
         assertEquals(true, stringSchema.isValid(null));
         assertEquals(true, stringSchema.isValid("what does the fox say"));
         assertEquals(true, stringSchema.isValid("hexlet"));
+        stringSchema.required();
+        assertEquals(false, stringSchema.isValid(""));
+        assertEquals(false, stringSchema.isValid(null));
     }
 
     @Test
