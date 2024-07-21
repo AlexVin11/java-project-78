@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StringSchemaTest {
     private static StringSchema stringSchema;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeEach
+    public void beforeEach() {
         stringSchema = Validator.string();
     }
 
