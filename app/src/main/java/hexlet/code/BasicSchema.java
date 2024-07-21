@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class BasicSchema<T> {
@@ -18,9 +19,14 @@ public class BasicSchema<T> {
     }
 
     protected boolean isValid(T t) {
-        if (checks.containsKey(IS_REQUIRED)
-                && !(checks.get(IS_REQUIRED).test(t))) {
-            return false;
+        if (checks.containsKey(IS_REQUIRED)) {
+            if (!checks.get(IS_REQUIRED).test(t)) {
+                return false;
+            }
+        } else {
+            if (Objects.isNull(t)) {
+                return true;
+            }
         }
         for (var check : checks.keySet()) {
             var predicate = checks.get(check);
