@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class MapSchema extends BasicSchema<Map> {
+public class MapSchema<T> extends BasicSchema<Map> {
+    private final String SHAPE = "shape";
     private final String SIZE_OF_MAP = "size";
 
     public MapSchema required() {
@@ -24,6 +25,27 @@ public class MapSchema extends BasicSchema<Map> {
             updateCheck(SIZE_OF_MAP, sizeOfPredicate);
         } else {
             this.addCheck(SIZE_OF_MAP, sizeOfPredicate);
+        }
+        return this;
+    }
+
+    public MapSchema shape(Map<String, BasicSchema<T>> keyAndConfiguration) {
+        Predicate<Map> shapePredicate = e -> {
+            var entrys = ((Map<String, T>)e).entrySet();
+            for (var entry : entrys) {
+                var key = entry.getKey();
+                var value = entry.getValue();
+                var schema = keyAndConfiguration.get(key);
+                if (schema.isValid(value)) {
+                    return true;
+                };
+            }
+            return false;
+        };
+        if (this.checks.containsKey(SHAPE)) {
+            updateCheck(SHAPE, shapePredicate);
+        } else {
+            this.addCheck(SHAPE, shapePredicate);
         }
         return this;
     }
