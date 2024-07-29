@@ -18,7 +18,7 @@ public class NumberSchema extends BasicSchema<Integer> {
             if (e == 0) {
                 return false;
             } else {
-                return e > 0 ? true : false;
+                return e > 0;
             }
         };
         addCheck(numberIsPositive, positive);
