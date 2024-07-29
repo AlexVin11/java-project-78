@@ -11,7 +11,7 @@ public class MapSchema<T> extends BasicSchema<Map> {
 
     public MapSchema required() {
         Predicate<Map> requiredPredicate = e -> !Objects.isNull(e) && (e instanceof HashMap);
-        this.addCheck(IS_REQUIRED, requiredPredicate);
+        this.addCheck(isRequired, requiredPredicate);
         return this;
     }
 

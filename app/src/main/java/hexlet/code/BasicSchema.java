@@ -7,15 +7,15 @@ import java.util.function.Predicate;
 
 public class BasicSchema<T> {
     protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
-    protected final String IS_REQUIRED = "required";
+    protected final String isRequired = "required";
 
     protected final void addCheck(String name, Predicate<T> predicate) {
         checks.put(name, predicate);
     }
 
     protected boolean isValid(T t) {
-        if (checks.containsKey(IS_REQUIRED)) {
-            if (!checks.get(IS_REQUIRED).test(t)) {
+        if (checks.containsKey(isRequired)) {
+            if (!checks.get(isRequired).test(t)) {
                 return false;
             }
         } else {

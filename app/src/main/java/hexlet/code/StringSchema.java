@@ -9,7 +9,7 @@ public class StringSchema extends BasicSchema<String> {
 
     public StringSchema required() {
         Predicate<String> requiredPredicate = e -> !Objects.isNull(e) && !e.equals("");
-        this.addCheck(IS_REQUIRED, requiredPredicate);
+        this.addCheck(isRequired, requiredPredicate);
         return this;
     }
 

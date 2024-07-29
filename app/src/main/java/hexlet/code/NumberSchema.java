@@ -9,7 +9,7 @@ public class NumberSchema extends BasicSchema<Integer>{
 
     public NumberSchema required() {
         Predicate<Integer> requiredPredicate = e -> !Objects.isNull(e);
-        this.addCheck(IS_REQUIRED, requiredPredicate);
+        this.addCheck(isRequired, requiredPredicate);
         return this;
     }
 
