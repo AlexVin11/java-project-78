@@ -14,7 +14,7 @@ public class NumberSchemaTest {
     }
 
     @Test
-    public void generalTestIsValid() {
+    public void TestIsValidBasic() {
         assertEquals(true, numberSchema.isValid(5));
         assertEquals(true, numberSchema.isValid(null));
         numberSchema.positive();
@@ -29,14 +29,14 @@ public class NumberSchemaTest {
     }
 
     @Test
-    public void borderTestIsValid() {
+    public void TestIsValidMinMaxBorder() {
         numberSchema.required();
         assertEquals(true, numberSchema.isValid(2147483647));
         assertEquals(true, numberSchema.isValid(-2147483647));
     }
 
     @Test
-    public void rangeTestIsValid() {
+    public void TestIsValidWithRange() {
         numberSchema.range(-5, 10);
         assertEquals(true, numberSchema.isValid(null));
         assertEquals(false, numberSchema.isValid(100));
@@ -54,7 +54,7 @@ public class NumberSchemaTest {
     }
 
     @Test
-    public void complexRangeTestIsValid() {
+    public void TestIsValidComplex() {
         numberSchema.required().positive().range(-5, 10);
         assertEquals(false, numberSchema.isValid(-5));
         assertEquals(false, numberSchema.isValid(-4));

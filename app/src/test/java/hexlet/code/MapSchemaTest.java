@@ -10,11 +10,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MapSchemaTest {
+    private static Validator validator = new Validator();
+    private static MapSchema mapSchema = validator.map();
 
     @Test
     public void TestIsValid() {
-        Validator validator = new Validator();
-        MapSchema mapSchema = validator.map();
         assertEquals(true, mapSchema.isValid(null));
         assertEquals(true, mapSchema.isValid(new HashMap()));
         mapSchema.required();
