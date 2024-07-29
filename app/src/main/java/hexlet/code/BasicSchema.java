@@ -13,11 +13,6 @@ public class BasicSchema<T> {
         checks.put(name, predicate);
     }
 
-    protected final void updateCheck(String name, Predicate<T> predicate) {
-        checks.clear();
-        checks.put(name, predicate);
-    }
-
     protected boolean isValid(T t) {
         if (checks.containsKey(IS_REQUIRED)) {
             if (!checks.get(IS_REQUIRED).test(t)) {
