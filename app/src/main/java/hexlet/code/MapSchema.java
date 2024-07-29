@@ -25,10 +25,10 @@ public class MapSchema<T> extends BasicSchema<Map> {
         addCheck(shape,
                 map -> {
                 return schemas.entrySet().stream().allMatch(e -> {
-                var k = map.get(e.getKey());
-                var schema = e.getValue();
-                return schema.isValid((T) k);
-            });
+                    var k = map.get(e.getKey());
+                    var schema = e.getValue();
+                    return schema.isValid((T) k);
+                });
                 });
         return this;
     }
