@@ -10,26 +10,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MapSchemaTest {
-    private static Validator v = new Validator();
-    private static MapSchema mapSchema;
-    /*private static StringSchema stringSchema;
-    private static NumberSchema numberSchema;*/
-    private static Map<String, BasicSchema<String>> stringValidationSchemas = new HashMap<>();
-    private static Map<String, BasicSchema<Integer>> numberValidationSchemas = new HashMap<>();
-
-    @BeforeEach
-    public void beforeEach() {
-        mapSchema = v.map();
-        /*stringSchema = v.string();
-        numberSchema = v.number();*/
-        stringValidationSchemas.put("firstName", v.string().required());
-        stringValidationSchemas.put("lastName", v.string().required().minLength(2));
-        numberValidationSchemas.put("phoneNumber", v.number().required());
-        numberValidationSchemas.put("zip", v.number().required().positive());
-    }
 
     @Test
     public void TestIsValid() {
+        Validator validator = new Validator();
+        MapSchema mapSchema = validator.map();
         assertEquals(true, mapSchema.isValid(null));
         assertEquals(true, mapSchema.isValid(new HashMap()));
         mapSchema.required();
@@ -43,10 +28,12 @@ public class MapSchemaTest {
         assertEquals(false, mapSchema.isValid(data));
         data.put("key2", "value2");
         assertEquals(true, mapSchema.isValid(data));
-    }
-
-    @Test
-    public void TestIsValidWithShape() {
+        Map<String, BasicSchema<String>> stringValidationSchemas = new HashMap<>();
+        Map<String, BasicSchema<Integer>> numberValidationSchemas = new HashMap<>();
+        stringValidationSchemas.put("firstName", validator.string().required());
+        stringValidationSchemas.put("lastName", validator.string().required().minLength(2));
+        numberValidationSchemas.put("phoneNumber", validator.number().required());
+        numberValidationSchemas.put("zip", validator.number().required().positive());
         mapSchema.shape(stringValidationSchemas);
         Map<String, String> person1 = new HashMap<>();
         person1.put("firstName", "John");
