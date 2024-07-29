@@ -11,42 +11,25 @@ public class MapSchema<T> extends BasicSchema<Map> {
 
     public MapSchema required() {
         Predicate<Map> requiredPredicate = e -> !Objects.isNull(e) && (e instanceof HashMap);
-        if (this.checks.containsKey(IS_REQUIRED)) {
-            updateCheck(IS_REQUIRED, requiredPredicate);
-        } else {
-            this.addCheck(IS_REQUIRED, requiredPredicate);
-        }
+        this.addCheck(IS_REQUIRED, requiredPredicate);
         return this;
     }
 
     public MapSchema sizeof(int size) {
         Predicate<Map> sizeOfPredicate = e -> e.size() == size;
-        if (this.checks.containsKey(SIZE_OF_MAP)) {
-            updateCheck(SIZE_OF_MAP, sizeOfPredicate);
-        } else {
-            this.addCheck(SIZE_OF_MAP, sizeOfPredicate);
-        }
+        this.addCheck(SIZE_OF_MAP, sizeOfPredicate);
         return this;
     }
 
-    public MapSchema shape(Map<String, BasicSchema<T>> keyAndConfiguration) {
-        Predicate<Map> shapePredicate = e -> {
-            var entrys = ((Map<String, T>)e).entrySet();
-            for (var entry : entrys) {
-                var key = entry.getKey();
-                var value = entry.getValue();
-                var schema = keyAndConfiguration.get(key);
-                if (schema.isValid(value)) {
-                    return true;
-                };
-            }
-            return false;
-        };
-        if (this.checks.containsKey(SHAPE)) {
-            updateCheck(SHAPE, shapePredicate);
-        } else {
-            this.addCheck(SHAPE, shapePredicate);
-        }
+    public <T> MapSchema shape(Map<String, BasicSchema<T>> schemas) {
+        addCheck(SHAPE,
+                map -> {
+            return schemas.entrySet().stream().allMatch(e -> {
+                var k = map.get(e.getKey());
+                var schema = e.getValue();
+                return schema.isValid((T) k);
+            });
+                });
         return this;
     }
 }
