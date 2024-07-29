@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -14,7 +13,7 @@ public class MapSchemaTest {
     private static MapSchema mapSchema = validator.map();
 
     @Test
-    public void TestIsValid() {
+    public void testIsValid() {
         assertEquals(true, mapSchema.isValid(null));
         assertEquals(true, mapSchema.isValid(new HashMap()));
         mapSchema.required();
