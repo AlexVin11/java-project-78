@@ -9,11 +9,7 @@ public class NumberSchema extends BasicSchema<Integer>{
 
     public NumberSchema required() {
         Predicate<Integer> requiredPredicate = e -> !Objects.isNull(e);
-        if (this.checks.containsKey(IS_REQUIRED)) {
-            updateCheck(IS_REQUIRED, requiredPredicate);
-        } else {
-            this.addCheck(IS_REQUIRED, requiredPredicate);
-        }
+        this.addCheck(IS_REQUIRED, requiredPredicate);
         return this;
     }
 
@@ -27,21 +23,13 @@ public class NumberSchema extends BasicSchema<Integer>{
                 return false;
             }
         };
-        if (this.checks.containsKey(NUMBER_IS_POSITIVE)) {
-            updateCheck(NUMBER_IS_POSITIVE, positive);
-        } else {
-            addCheck(NUMBER_IS_POSITIVE, positive);
-        }
+        addCheck(NUMBER_IS_POSITIVE, positive);
         return this;
     }
 
     public NumberSchema range(Integer a, Integer b) {
         Predicate<Integer> rangePredicate = e -> e >= a && e <= b;
-        if (this.checks.containsKey(NUMBER_IN_RANGE)) {
-            updateCheck(NUMBER_IN_RANGE, rangePredicate);
-        } else {
-            addCheck(NUMBER_IN_RANGE, rangePredicate);
-        }
+        addCheck(NUMBER_IN_RANGE, rangePredicate);
         return this;
     }
 }
