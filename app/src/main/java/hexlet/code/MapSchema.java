@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class MapSchema<T> extends BasicSchema<Map> {
-    private final String SHAPE = "shape";
-    private final String SIZE_OF_MAP = "size";
+    private final String shape = "shape";
+    private final String sizeOfMap = "size";
 
     public MapSchema required() {
         Predicate<Map> requiredPredicate = e -> !Objects.isNull(e) && (e instanceof HashMap);
@@ -17,14 +17,14 @@ public class MapSchema<T> extends BasicSchema<Map> {
 
     public MapSchema sizeof(int size) {
         Predicate<Map> sizeOfPredicate = e -> e.size() == size;
-        this.addCheck(SIZE_OF_MAP, sizeOfPredicate);
+        this.addCheck(sizeOfMap, sizeOfPredicate);
         return this;
     }
 
     public <T> MapSchema shape(Map<String, BasicSchema<T>> schemas) {
-        addCheck(SHAPE,
+        addCheck(shape,
                 map -> {
-            return schemas.entrySet().stream().allMatch(e -> {
+                return schemas.entrySet().stream().allMatch(e -> {
                 var k = map.get(e.getKey());
                 var schema = e.getValue();
                 return schema.isValid((T) k);
