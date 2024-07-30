@@ -10,7 +10,7 @@ public class StringSchemaTest {
     private static StringSchema stringSchema;
 
     @BeforeEach
-    public void beforeEach() {
+    public final void beforeEach() {
         stringSchema = Validator.string();
     }
 

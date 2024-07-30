@@ -10,7 +10,7 @@ public class NumberSchemaTest {
     private static NumberSchema numberSchema;
 
     @BeforeEach
-    public void beforeEach() {
+    public final void beforeEach() {
         numberSchema = Validator.number();
     }
 
