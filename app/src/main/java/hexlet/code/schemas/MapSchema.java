@@ -24,11 +24,11 @@ public class MapSchema<T> extends BasicSchema<Map> {
     public <T> MapSchema shape(Map<String, BasicSchema<T>> schemas) {
         addCheck(shape,
                 map -> {
-                return schemas.entrySet().stream().allMatch(e -> {
-                    var k = map.get(e.getKey());
-                    var schema = e.getValue();
-                    return schema.isValid((T) k);
-                });
+                    return schemas.entrySet().stream().allMatch(e -> {
+                        var k = map.get(e.getKey());
+                        var schema = e.getValue();
+                        return schema.isValid((T) k);
+                    });
                 });
         return this;
     }
