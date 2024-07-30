@@ -1,5 +1,8 @@
 # Makefile
 
+install:
+	./gradlew install
+
 run-dist:
 	# Очистка от результатов предыдущей сборки
 	./gradlew clean
@@ -8,3 +11,6 @@ run-dist:
 
 test:
 	./gradlew test
+
+report:
+	./gradlew jacocoTestReport
