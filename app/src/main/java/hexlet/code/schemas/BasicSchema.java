@@ -13,7 +13,7 @@ public class BasicSchema<T> {
         checks.put(name, predicate);
     }
 
-    protected boolean isValid(T t) {
+    public boolean isValid(T t) {
         if (checks.containsKey(isRequired)) {
             if (!checks.get(isRequired).test(t)) {
                 return false;
