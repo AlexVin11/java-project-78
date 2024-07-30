@@ -16,19 +16,18 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/gradle-build-action@v3
         with:
-          gradle-version: 8.7
+          gradle-version: 8.5
           arguments: build
-          build_root_directory: app
-      - name: gradlew Build, Checkstyle and Test commands
-        run: |
-          cd app
-          ./gradlew checkstyleMain
-          ./gradlew test
+          build-root-directory: app
+      #- name: Run Checkstyle
+      #  run: make lint
+      #- name: Run tests
+      #  run: make test
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v6.0.0
         env:
-           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-           JACOCO_SOURCE_PATH: app/src/main/java
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          JACOCO_SOURCE_PATH: app/src/main/java
         with:
-           coverageCommand: make report
-           coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
