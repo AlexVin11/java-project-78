@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class MapSchema<T> extends BaseSchema<Map> {
+public final class MapSchema<T> extends BaseSchema<Map> {
     private final String shape = "shape";
     private final String sizeOfMap = "size";
 
