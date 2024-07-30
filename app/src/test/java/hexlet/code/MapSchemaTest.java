@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.schemas.BasicSchema;
+import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +29,8 @@ public class MapSchemaTest {
         assertEquals(false, mapSchema.isValid(data));
         data.put("key2", "value2");
         assertEquals(true, mapSchema.isValid(data));
-        Map<String, BasicSchema<String>> stringValidationSchemas = new HashMap<>();
-        Map<String, BasicSchema<Integer>> numberValidationSchemas = new HashMap<>();
+        Map<String, BaseSchema<String>> stringValidationSchemas = new HashMap<>();
+        Map<String, BaseSchema<Integer>> numberValidationSchemas = new HashMap<>();
         stringValidationSchemas.put("firstName", validator.string().required());
         stringValidationSchemas.put("lastName", validator.string().required().minLength(2));
         numberValidationSchemas.put("phoneNumber", validator.number().required());

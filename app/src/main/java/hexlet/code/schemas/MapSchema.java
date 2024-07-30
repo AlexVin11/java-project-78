@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class MapSchema<T> extends BasicSchema<Map> {
+public class MapSchema<T> extends BaseSchema<Map> {
     private final String shape = "shape";
     private final String sizeOfMap = "size";
 
@@ -21,7 +21,7 @@ public class MapSchema<T> extends BasicSchema<Map> {
         return this;
     }
 
-    public <T> MapSchema shape(Map<String, BasicSchema<T>> schemas) {
+    public <T> MapSchema shape(Map<String, BaseSchema<T>> schemas) {
         addCheck(shape,
                 map -> {
                     return schemas.entrySet().stream().allMatch(e -> {

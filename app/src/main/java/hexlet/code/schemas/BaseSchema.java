@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class BasicSchema<T> {
+public class BaseSchema<T> {
     protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
     protected final String isRequired = "required";
 

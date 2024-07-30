@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class NumberSchema extends BasicSchema<Integer> {
+public class NumberSchema extends BaseSchema<Integer> {
     private final String numberIsPositive = "positive";
     private final String numberInRange = "range";
 
