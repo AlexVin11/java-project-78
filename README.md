@@ -11,13 +11,18 @@ Basic usage scenario look like this:
 3. StringSchema contains a few of properties- .required() - if given string is empty or null return false, .contains("str") - given string should contain a given substring, .minLength(int min) - given string should be longer or same length as was set up.
 4. NumberSchema contains properties: .required() - if user gives empty or null input it return false, .positive() - given number should be positive, .range(int min, int max) - given number must be in given range. 
 5. MapSchema contains properties: .required() - if empty or null input it return false, .size(int min) - given map must greater or equal given size.
+
 MapSchema has .shape() method that allows user to configure the list of checks for given property.
+
 For example we will create a string and list of checks for it.
-Example of usage .shape() looks like this: 
+
+Example of usage .shape() looks like this:
+
 1. Go to step 1 and 2 (we would need v.map()).
 2. For string we create a map that contains checks: Map<String, BaseSchema<String>> schemas = new HashMap<>();
 3. Lets create a string and list of checks for it: schemas.put("firstName", v.string().required()); schemas.put("lastName", v.string().required().minLength(2));
 4. schema.shape(schemas) now we have a map with property (firstName and lastName) and list of checks specified for these properties.
 5. Now we will create a map for checking: Map<String, String> human1 = new HashMap<>();, and fill it with data: human1.put("firstName", "John"); human1.put("lastName", "Smith");
 6. Now we can check map we created on step 5. schema.isValid(human1);//it will return true
+
 How it works: human1 has firstName and constraints for it- it should not be empty or null. lastName and constraints for it- it should not be empty or null and it must be longer or equals 2 symbols. All checks are successful.
